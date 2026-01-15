@@ -54,7 +54,7 @@ def prepare_test_vectors(data, batch_size):
         sample = np.random.choice(current_data_pool, size=sample_size, replace=False)
         search_queries.append(sample)
         
-    # 3. Delete Batches (Randomized order of all items)
+    # Delete Batches (Randomized order of all items)
     delete_order = np.copy(data)
     np.random.shuffle(delete_order)
     delete_batches = [delete_order[i:i + batch_size] for i in range(0, total_items, batch_size)]
@@ -74,7 +74,7 @@ def run_profile_stats(name, func, *args):
     pr.disable()
     
     s = io.StringIO()
-    # Sort stats by 'tottime' time spent strictly inside the function excluding sub-calls
+    # Sort stats by tottime time spent strictly inside the function excluding sub-calls
     ps = pstats.Stats(pr, stream=s).sort_stats('tottime')
     ps.print_stats(10) 
     print(s.getvalue())
@@ -105,7 +105,7 @@ def run_profiled_benchmark(name, tree_factory, test_vectors):
                 for val in batch: tree.insert_node(val)
             run_profile_stats("INSERT Batch", _op_insert)
             
-            #Profile SEARCH on the tree of size target_size
+            #Profile SEARCH
             queries = search_queries[i]
             def _op_search():
                 for val in queries: tree.search_node(val)
