@@ -5,6 +5,7 @@ __pycache__/
 *.pyd
 
 avlvenv/
+test2venv/
 
 venv/
 .venv/
